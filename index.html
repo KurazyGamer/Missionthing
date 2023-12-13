@@ -1,0 +1,102 @@
+<!-- Seth Huck -->
+<!--Add the doctype tag to tell the browser what type of document this is-->
+<!DOCTYPE html>
+<!--Add the html to start you html document and set the lan to english-->
+<html lan="en">
+    <!-- Add the head tag to contain the metadata for the document-->
+    <head>
+        <!-- Adds the metadata stuff-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- add the title tag to give the document a title-->
+        <title>Secret Agent HQ</title>
+
+        <!-- Use CSS to stule this page with a dark spy theme-->
+        <style>
+            body {
+
+                font-family: 'Courier New', Courier, monospace;
+                background-color: #2b2b2b;
+                color: #ffffff;
+            }
+            .container{
+                max-width: 600px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #333333;
+                box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1)
+            }
+            .warning{
+                color: #ff0000;
+            }
+            h1{
+                text-align: center;
+            }
+        </style>
+
+    </head>
+    <!-- Add the body tag to contain the visible page content-->
+    <body>
+        <!-- This will be our main container for our content.-->
+        <div class="container">
+            <!-- Lets put a header for our title in our Secret Agent app-->
+            <h1>Secret Agent HQ</h1>
+            <!-- Add instructions for our user-->
+            <p>Agent, enter your credenticals to receive the mission...</p>
+            <!-- Add a single form for all our inputs needed-->
+            <form id="agentForm">
+                <!-- Add a Label to label the first name textbox-->
+                <label for="firstName">First Name:</label>
+                <!-- Add the first name textbox-->
+                <input type="text" id="firstName" placeholder="Enter your first name" required><br></br>
+                <!-- Add a labe to label the last name textbox-->
+                <label for="lastName">Last Name:</label>
+                <!-- Add the last name textbox-->
+                <input type="text" id="lastName" placeholder="Enter your last name" required><br></br>
+                <!-- Add the zipcode label-->
+                <label for="zipcode">Zipcode:</label>
+                <!-- Add the zipcode textbox-->
+                <input type="text" id="zipcode" placeholder="Enter your zipcode" required><br></br>
+                <!-- Add the submit button-->
+                <input type="submit" value="Get Mission">
+            </form>
+            <!-- Add a div to hold warning messages-->
+            <div class="warning" id="warningMessage"></div>
+            <!-- Add a div to hold the mission details which are hidden by default-->
+            <div id="secretMission" style="display: none;">
+                Your mission should you choose to accept it: "Guard the mall enterance"
+            </div>
+            <!-- Add our javaScript for validation-->
+            <script>
+                // Add an event listener to our form for validation when the user presses submit to submit the form
+                document.getElementById("agentForm").addEventListener("submit", function(event){
+                    // prevent the default form submit action
+                    event.preventDefault();
+                    //Get the data values from the form the user typed in
+                    const firstName = document.getElementById("firstName").value;
+                    const lastName = document.getElementById("lastName").value;
+                    const zipcode = document.getElementById("zipcode").value;
+
+                    // combine the first and last names
+                    const fullName = firstName + " " + lastName;
+
+                    // validate the length of the entire name so that it is not over 20 characters long
+                    if(fullName.length > 20){
+                        // If it is over 20 characters long, show the warning message
+                        document.getElementById("warningMessage").innerHTML = "Full Name is too long for our Records";
+                        return;
+                    }
+
+                    //check if the zipcode is 5 characters long
+                    if(zipcode.length !=5){
+                        //If it is not 5 characters long, show the warning message
+                        document.getElementById("warningMessage").innerHTML = "Invalid zipcode";
+                        return;
+                    }
+                    //If all validation passes then show the mission details
+                    document.getElementById("secretMission").style.display = "block";
+                });
+            </script>
+        </div>
+    </body>
+</html>
